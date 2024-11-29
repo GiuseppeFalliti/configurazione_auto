@@ -1,0 +1,113 @@
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestione_Auto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+        <div class="box">   
+        <div class="boxShadow">
+        <Label id="title">Configurazione Auto Audi:</Label> 
+
+        <form action="post">
+        <div class="motore">
+        <label for="motore">Tipo motore:</label>  <br>
+        <select id="motore">
+            <option value="benzina">benzina</option>
+            <option value="disel">disel</option>
+            <option value="ibrido">ibrido</option>
+            <option value="econsttrico">Econsttrico</option>
+        </select>
+    </div>
+
+    <br>
+
+    <div class="versione">
+    <label for="versione">Versione:</label><br>
+    <select  id="versione"> 
+        <option value="Base">Base</option>
+        <option value="Sportiva">Sportiva</option>
+        <option value="SUV">SUV</option>
+    </select>
+    </div>
+
+    </br>
+
+        <div class="estero">
+        <label for="Colore" >Esterno:</label> <br>
+        <input type="color" name="colore" id="color">
+    </div>
+    </br>
+
+    <div class="modello">
+    <label for="Colore">Modello:</label> <br>
+    <select id="modello">
+       
+    </select>
+    </div>
+    <br>
+
+    <div class="prezzo">
+    <label for="prezzo">Prezzo:</label>
+    <span id="prezzo"></span>
+</div>
+</form>
+</div>
+</div>
+
+<script>
+    const motore=document.getElementById("motore");
+    const versione=document.getElementById("versione");
+    const modello = document.getElementById("modello");
+    const prezzo= document.getElementById("prezzo");
+    
+    //configurazioni auto
+    const configurazioni = {
+        base: [
+            { modello: "A1", prezzo: "€ 15.000,00" },
+            { modello: "A2", prezzo: "€ 16.500,00" },
+        ],
+        sportiva: [
+            { modello: "S1", prezzo: "€ 25.000,00" },
+            { modello: "S2", prezzo: "€ 28.000,00" },
+        ],
+        suv: [
+            { modello: "Q3", prezzo: "€ 35.000,00" },
+            { modello: "Q5", prezzo: "€ 40.000,00" },
+        ],
+    };
+
+
+    function aggiornaModelli() {
+        const versiones = versione.value.toLowerCase();
+        
+
+        
+        modello.innerHTML = "<option value=''>Seleziona un modello</option>";
+
+        if (configurazioni[versione]) {
+            configurazioni[versione].forEach((config) => {
+                const option = document.createElement("option");
+                option.value = config.prezzo;
+                option.textContent = config.modello;
+                modelloSelect.appendChild(option);
+            });
+        }
+
+        // Resetta il prezzo
+        prezzoSpan.textContent = "";
+    }
+
+    function aggiornaPrezzo() {
+        const prezzos = modello;
+        prezzo.textContent = prezzos ? prezzos : "";
+    }
+
+     
+    versione.addEventListener("change", aggiornaModelli);
+    modello.addEventListener("change", aggiornaPrezzo);
+
+</script>
+</body>
+</html>
