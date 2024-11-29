@@ -57,10 +57,10 @@
 </div>
 
 <script>
-    const motore=document.getElementById("motore");
-    const versione=document.getElementById("versione");
-    const modello = document.getElementById("modello");
-    const prezzo= document.getElementById("prezzo");
+    const motoreSelect=document.getElementById("motore");
+    const versioneSelect=document.getElementById("versione");
+    const modelloSelect = document.getElementById("modello");
+    const prezzoSpan= document.getElementById("prezzo");
     
     //configurazioni auto
     const configurazioni = {
@@ -73,40 +73,47 @@
             { modello: "S2", prezzo: "€ 28.000,00" },
         ],
         suv: [
-            { modello: "Q3", prezzo: "€ 35.000,00" },
+            { modello: "Q3",prezzo: "€ 35.000,00" },
             { modello: "Q5", prezzo: "€ 40.000,00" },
         ],
     };
 
 
     function aggiornaModelli() {
-        const versiones = versione.value.toLowerCase();
-        
+        const versione = versioneSelect.value.toLowerCase();
 
-        
-        modello.innerHTML = "<option value=''>Seleziona un modello</option>";
+        // Reset modello precedente
+        modelloSelect.innerHTML = "";
 
         if (configurazioni[versione]) {
-            configurazioni[versione].forEach((config) => {
+            for (let i = 0; i < configurazioni[versione].length; i++) {
                 const option = document.createElement("option");
-                option.value = config.prezzo;
-                option.textContent = config.modello;
+                option.value = i; 
+                option.textContent = configurazioni[versione][i].modello;
                 modelloSelect.appendChild(option);
-            });
+            }
         }
 
-        // Resetta il prezzo
+        // Reset prezzo
         prezzoSpan.textContent = "";
     }
 
+    
     function aggiornaPrezzo() {
-        const prezzos = modello;
-        prezzo.textContent = prezzos ? prezzos : "";
+        const versione = versioneSelect.value.toLowerCase();
+        const indice = modelloSelect.value;
+
+        
+        if (indice && configurazioni[versione] && configurazioni[versione][indice]) {
+            prezzoSpan.textContent = configurazioni[versione][indice].prezzo;
+        } else {
+            prezzoSpan.textContent = "";
+        }
     }
 
-     
-    versione.addEventListener("change", aggiornaModelli);
-    modello.addEventListener("change", aggiornaPrezzo);
+    
+    versioneSelect.addEventListener("change", aggiornaModelli);
+    modelloSelect.addEventListener("change", aggiornaPrezzo);
 
 </script>
 </body>
