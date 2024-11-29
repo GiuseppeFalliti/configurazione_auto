@@ -1,0 +1,1 @@
+# configurazione_auto
