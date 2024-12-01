@@ -8,21 +8,22 @@
 <body>
         <div class="box">   
         <div class="boxShadow">
-        <Label id="title">Configurazione Auto Audi:</Label> 
+        <Label id="title">Configurazione Auto:</Label> 
 
         <form action="post">
+        <!--motore-->
         <div class="motore">
         <label for="motore">Tipo motore:</label>  <br>
         <select id="motore">
             <option value="benzina">benzina</option>
             <option value="disel">disel</option>
             <option value="ibrido">ibrido</option>
-            <option value="econsttrico">Econsttrico</option>
+            <option value="econsttrico">Elettrico</option>
         </select>
     </div>
 
     <br>
-
+     <!--versione-->
     <div class="versione">
     <label for="versione">Versione:</label><br>
     <select  id="versione"> 
@@ -33,23 +34,51 @@
     </div>
 
     </br>
-
+         <!--esterno-->
         <div class="estero">
-        <label for="Colore" >Esterno:</label> <br>
+        <label for="Colore" >Colore Esterno:</label> <br>
         <input type="color" name="colore" id="color">
     </div>
     </br>
-
+     <!--rivestmento interno-->
+    <div class="interni">
+        <label for="rivestimento">Tipo di rivestimento:</label> <br>
+        <select id="rivestimento">
+            <option value="tessuto">Tessuto</option>
+            <option value="pelle">Pelle</option>
+        </select>
+    </div>
+     
+    </br>
+    <!--colore interno-->
+    <div class="interniColore">
+        <label for="colore_interni">Colore interni:</label> <br>
+        <input type="color" id="colore_interni" name="colore_interni">
+    </div>
+    
+    </br>
+     <!--modello-->
     <div class="modello">
     <label for="Colore">Modello:</label> <br>
     <select id="modello">
+
        
     </select>
     </div>
     <br>
-
+    <!--assistenza guida-->
+    <div class="guida">
+        <label for="assistenza">Assistenza alla guida:</label> <br>
+        <select id="assistenza">
+            <option value="base">Base</option>
+            <option value="avanzato">Avanzato</option>
+        </select>
+    </div>
+    <br>
+    
+    <!--prezzo-->
     <div class="prezzo">
-    <label for="prezzo">Prezzo:</label>
+    <label for="prezzo">Totale Configurazione:</label> <br>
     <span id="prezzo"></span>
 </div>
 </form>
@@ -60,27 +89,47 @@
     const motoreSelect=document.getElementById("motore");
     const versioneSelect=document.getElementById("versione");
     const modelloSelect = document.getElementById("modello");
+    const rivestimentoSelect = document.getElementById("rivestimento");
+    const assistenzaSelect = document.getElementById("assistenza");
     const prezzoSpan= document.getElementById("prezzo");
     
     //configurazioni auto
     const configurazioni = {
+        //versione
         base: [
-            { modello: "A1", prezzo: "€ 15.000,00" },
-            { modello: "A2", prezzo: "€ 16.500,00" },
+            { modello: "A1", prezzo: "15000" },
+            { modello: "A2", prezzo: "16500" },
         ],
         sportiva: [
-            { modello: "S1", prezzo: "€ 25.000,00" },
-            { modello: "S2", prezzo: "€ 28.000,00" },
+            { modello: "S1", prezzo: "250000" },
+            { modello: "S2", prezzo: "280000" },
         ],
         suv: [
-            { modello: "Q3",prezzo: "€ 35.000,00" },
-            { modello: "Q5", prezzo: "€ 40.000,00" },
+            { modello: "Q3",prezzo: "350000" },
+            { modello: "Q5", prezzo: "400000" },
         ],
+        //rivestimento
+        tessuto: [
+            {prezzo: "500" },
+        ],
+        pelle: [
+            {prezzo: "4000" },
+        ],
+        //assistenza guida
+        base: [
+            {prezzo: "0"},
+        ],
+        avanzato: [
+            {prezzo: "1000"},
+        ],
+        
+
     };
 
 
     function aggiornaModelli() {
         const versione = versioneSelect.value.toLowerCase();
+       
 
         // Reset modello precedente
         modelloSelect.innerHTML = "";
@@ -101,19 +150,37 @@
     
     function aggiornaPrezzo() {
         const versione = versioneSelect.value.toLowerCase();
-        const indice = modelloSelect.value;
+        const rivestimento = rivestimentoSelect.value.toLowerCase();
+        const assistenza = assistenzaSelect.value.toLowerCase();
+        const indiceM = modelloSelect.value;
+        let prezzoM=0; let prezzoR=0; let prezzoA=0;
 
-        
-        if (indice && configurazioni[versione] && configurazioni[versione][indice]) {
-            prezzoSpan.textContent = configurazioni[versione][indice].prezzo;
-        } else {
-            prezzoSpan.textContent = "";
+        //ottenere prezzo del modello selezionato
+        if (indiceM && configurazioni[versione] && configurazioni[versione][indiceM] ) {
+            prezzoM = parseFloat(configurazioni[versione][indiceM].prezzo);
+
+        } 
+
+        //ottenere prezzo del rivestimento selezionato
+        if(configurazioni[rivestimento]){
+            prezzoR=parseFloat(configurazioni[rivestimento][0].prezzo);
+
         }
+
+        //ottenere prezzo della configurazione di guida selezionato
+        if (configurazioni[assistenza]) {
+            prezzoA = parseFloat(configurazioni[assistenza][0].prezzo);
+        }
+
+        const prezzoTotale = prezzoM + prezzoR + prezzoA;
+        prezzoSpan.textContent = `€ ${prezzoTotale}`
     }
 
     
     versioneSelect.addEventListener("change", aggiornaModelli);
     modelloSelect.addEventListener("change", aggiornaPrezzo);
+    rivestimentoSelect.addEventListener("change",aggiornaPrezzo);
+    assistenzaSelect.addEventListener("change", aggiornaPrezzo);
 
 </script>
 </body>
