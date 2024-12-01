@@ -60,4 +60,4 @@ Un semplice configuratore di automobili sviluppato in **HTML**, **CSS** e **Java
 
 ## Contatti
 - **Email**: giuseppe.falliti5@gmail.com
-- **GitHub**: [Giuseppe Falliti](https://github.com/tuo-username)
+- **GitHub**: [Giuseppe Falliti](https://github.com/GiuseppeFalliti)
