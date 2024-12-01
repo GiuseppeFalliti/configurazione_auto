@@ -38,8 +38,8 @@ Un semplice configuratore di automobili sviluppato in **HTML**, **CSS** e **Java
 
 ## Screenshot
 
-![Schermata del Configuratore](![immagine](https://github.com/user-attachments/assets/d8aa73a9-0b76-4a9f-a061-d4324d1ee4ab)
-) 
+![Schermata del Configuratore] ![immagine](https://github.com/user-attachments/assets/d8aa73a9-0b76-4a9f-a061-d4324d1ee4ab)
+
 
 ---
 
