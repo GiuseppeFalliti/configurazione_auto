@@ -50,14 +50,6 @@ Un semplice configuratore di automobili sviluppato in **HTML**, **CSS** e **Java
 
 ---
 
-## Prossimi Sviluppi
-
-- Aggiunta di più opzioni di personalizzazione.
-- Salvataggio delle configurazioni tramite **LocalStorage** o un backend.
-- Implementazione di una versione mobile-friendly.
-
----
-
 ## Contatti
 - **Email**: giuseppe.falliti5@gmail.com
 - **GitHub**: [Giuseppe Falliti](https://github.com/GiuseppeFalliti)
